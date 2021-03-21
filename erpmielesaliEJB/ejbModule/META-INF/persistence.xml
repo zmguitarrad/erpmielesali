@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="zmguitarradDS" transaction-type="JTA">
+		<jta-data-source>java:/zmguitarradDS</jta-data-source>
+		<class>erpmielesali.model.core.entities.AudBitacora</class>
+		<class>erpmielesali.model.core.entities.ControlColmena</class>
+		<class>erpmielesali.model.core.entities.ControlPlaga</class>
+		<class>erpmielesali.model.core.entities.ControlTarea</class>
+		<class>erpmielesali.model.core.entities.GastGasto</class>
+		<class>erpmielesali.model.core.entities.GastTipoGasto</class>
+		<class>erpmielesali.model.core.entities.ProdProducto</class>
+		<class>erpmielesali.model.core.entities.ProdStock</class>
+		<class>erpmielesali.model.core.entities.ProdTipoProducto</class>
+		<class>erpmielesali.model.core.entities.SegAsignacion</class>
+		<class>erpmielesali.model.core.entities.SegModulo</class>
+		<class>erpmielesali.model.core.entities.SegUsuario</class>
+		<class>erpmielesali.model.core.entities.ThmCargo</class>
+		<class>erpmielesali.model.core.entities.ThmEmpleado</class>
+		<class>erpmielesali.model.core.entities.ThmRolCabecera</class>
+		<class>erpmielesali.model.core.entities.ThmRolDetalle</class>
+		<class>erpmielesali.model.core.entities.VentCliente</class>
+		<class>erpmielesali.model.core.entities.VentDireccion</class>
+		<class>erpmielesali.model.core.entities.VentVentaDetalle</class>
+		<class>erpmielesali.model.core.entities.VentVenta</class>
+	</persistence-unit>
+</persistence>

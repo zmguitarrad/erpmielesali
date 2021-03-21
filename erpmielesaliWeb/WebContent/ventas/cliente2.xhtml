@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:metadata>
+	<f:event listener="#{beanSegLogin.actionVerificarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata>
+<h:head>
+	<title>Cliente Consulta y agregacion</title>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-home" action="menu" />
+			<f:facet name="options">
+				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
+					icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"
+						action="#{beanSegLogin.actionCerrarSesion()}"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+	<p:panel>
+		<p:commandButton value="Nuevo" icon="pi pi-plus" id="cmdNuevo"></p:commandButton>
+		<p:overlayPanel for="cmdNuevo" showCloseIcon="true">
+			<h:form>
+				<p:panelGrid columns="2">
+				<h:outputText value="ID cliente:" />
+				<p:inputText value="#{beanVenCliente.idVentCliente}"
+					required="true" requiredMessage="Ingrese la cedula del cliente" />
+					<h:outputText value="Seleccione la direccion:" />
+					<p:selectOneMenu value="#{beanVenCliente.idVentDireccion}">
+						<f:selectItem itemLabel="Seleccione..." noSelectionOption="true" />
+						<f:selectItems value="#{beanVenCliente.listaDireccion}"
+							var="u" itemLabel="#{u.nombreDireccion}"
+							itemValue="#{u.idVentDireccion}"></f:selectItems>
+					</p:selectOneMenu>
+					<h:outputText value="Nombre cliente:" />
+				<p:inputText value="#{beanVenCliente.nombreCliente}"
+					required="true" requiredMessage="Ingrese el nombre del cliente" />
+				<h:outputText value="Apellido cliente:" />
+				<p:inputText value="#{beanVenCliente.apellidoCliente}"
+					required="true" requiredMessage="Ingrese el apellido del cliente" />
+					<h:outputText value="Celular:" />
+				<p:inputText value="#{beanVenCliente.celular}"
+					required="true" requiredMessage="Ingrese el celular del cliente" />
+					<h:outputText value="Email cliente:" />
+				<p:inputText value="#{beanVenCliente.email}"
+					required="true" requiredMessage="Ingrese el email del cliente" />
+					<h:outputText value="Razon cliente:" />
+				<p:inputText value="#{beanVenCliente.razon}"
+					required="true" requiredMessage="Ingrese la razon del cliente" />
+					
+					<p:commandButton value="Guardar" icon="pi pi-save"
+						actionListener="#{beanVenCliente.actionListenerInsertarNuevoClienteActual()}"
+						update="@form:,formDatos"></p:commandButton>
+				</p:panelGrid>
+			</h:form>
+		</p:overlayPanel>
+		<h:form id="formDatos">
+				
+			<p:dataTable value="#{beanVenCliente.listaClientes}" var="c"
+				paginator="true" rows="5">
+				<p:column headerText="ID">
+					<h:outputText value="#{c.cedulaVentCliente}" />
+				</p:column>
+								<p:column headerText="Direccion" filterBy="#{c.ventDireccion}"
+					filterMatchMode="contains">
+					<h:outputText value="#{c.ventDireccion.nombreDireccion}" />
+				</p:column>
+				<p:column headerText="Nombre" filterBy="#{c.nombreCliente}"
+					filterMatchMode="contains">
+					<h:outputText value="#{c.nombreCliente}" />
+				</p:column>
+				<p:column headerText="Apellido" filterBy="#{c.apellidoCliente}"
+					filterMatchMode="contains">
+					<h:outputText value="#{c.apellidoCliente}" />
+				</p:column>
+				<p:column headerText="Celular">
+					<h:outputText value="#{c.celular}" />
+				</p:column>
+				<p:column headerText="email">
+					<h:outputText value="#{c.email}" />
+				</p:column>
+				<p:column headerText="Razon">
+					<h:outputText value="#{c.razon}" />
+				</p:column>
+				<p:column headerText="OPCIONES">
+					
+					<p:commandButton icon="pi pi-pencil" title="editar"
+						action= "#{beanVenCliente.actionListenerCargarClientes(c)}"/>
+					<p:commandButton icon="pi pi-times-circle" title="eliminar"
+						styleClass="ui-button-danger" update="@form"
+						actionListener="#{beanVenCliente.actionListenerEliminarCliente(c.cedulaVentCliente)}">
+						<p:confirm header="Confirmación"
+							message="Desea borrar cliente?" icon="pi pi-info-circle" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</p:panel>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+		responsive="true" width="350">
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no ui-button-flat" />
+		<p:commandButton value="Sí" type="button"
+			styleClass="ui-confirmdialog-yes" />
+	</p:confirmDialog>
+</body>
+</html>

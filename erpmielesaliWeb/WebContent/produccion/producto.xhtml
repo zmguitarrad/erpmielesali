@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:metadata>
+	<f:event listener="#{beanSegLogin.actionVerificarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata>
+<h:head>
+	<title>Producto</title>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-home" action="menu" />
+			<p:menuitem value="Nuevo producto" icon="pi pi-user-plus"
+				action="#{beanProdProducto.actionMenuNuevoProducto()}" />
+			<f:facet name="options">
+				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
+					icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"
+						action="#{beanSegLogin.actionCerrarSesion()}"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+	<p:panel header="Lista de Producto">
+		<h:form>
+			<p:dataTable value="#{beanProdProducto.listaProducto}" var="producto"
+				paginator="true" rows="5">
+				<p:column headerText="Codigo producto">
+					<h:outputText value="#{producto.codigoProdProduct}" />
+				</p:column>
+				<p:column headerText="Tipo Producto" filterBy="#{producto.prodTipoProducto}"
+					filterMatchMode="contains">
+					<h:outputText value="#{producto.prodTipoProducto.nombreTipoProducto}" />
+				</p:column>
+				<p:column headerText="Nombre" filterBy="#{producto.nombreProducto}"
+					filterMatchMode="contains">
+					<h:outputText value="#{producto.nombreProducto}" />
+				</p:column>
+				<p:column headerText="Descripción" filterBy="#{producto.descripcionProducto}"
+					filterMatchMode="contains">
+					<h:outputText value="#{producto.descripcionProducto}" />
+				</p:column>
+				<p:column headerText="Precio" filterBy="#{producto.precio}"
+					filterMatchMode="contains">
+					<h:outputText value="#{producto.precio}" />
+				</p:column>
+				<p:column headerText="ACTIVO">
+					<h:outputText value="#{producto.activo}" />
+				</p:column>
+				<p:column headerText="OPCIONES">
+					<p:commandButton icon="pi pi-check-circle"
+						title="activar/desactivar" styleClass="ui-button-warning"
+						update="@form"
+						actionListener="#{beanProdProducto.actionListenerActivarDesactivarProducto(producto.codigoProdProduct)}" />
+					<p:commandButton icon="pi pi-pencil" title="editar"
+						action="#{beanProdProducto.actionSeleccionarEdicionProducto(producto)}" />	
+					<p:commandButton icon="pi pi-times-circle" title="eliminar"
+						styleClass="ui-button-danger" update="@form"
+						actionListener="#{beanProdProducto.actionListenerEliminarProducto(producto.codigoProdProduct)}">
+						<p:confirm header="Confirmación"
+							message="Desea borrar este producto?" icon="pi pi-info-circle" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</p:panel>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+		responsive="true" width="350">
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no ui-button-flat" />
+		<p:commandButton value="Sí" type="button"
+			styleClass="ui-confirmdialog-yes" />
+	</p:confirmDialog>
+</body>
+</html>

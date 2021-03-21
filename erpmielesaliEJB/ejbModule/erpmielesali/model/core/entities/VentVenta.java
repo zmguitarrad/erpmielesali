@@ -1,0 +1,119 @@
+package erpmielesali.model.core.entities;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the vent_ventas database table.
+ * 
+ */
+@Entity
+@Table(name="vent_ventas")
+@NamedQuery(name="VentVenta.findAll", query="SELECT v FROM VentVenta v")
+public class VentVenta implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_vent_ventas", unique=true, nullable=false)
+	private Integer idVentVentas;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="fecha_ventas")
+	private Date fechaVentas;
+
+	private Integer iva;
+
+	@Column(precision=3, scale=2)
+	private BigDecimal neto;
+
+	@Column(precision=3, scale=2)
+	private BigDecimal total;
+
+	//bi-directional many-to-one association to VentVentaDetalle
+	@OneToMany(mappedBy="ventVenta")
+	private List<VentVentaDetalle> ventVentaDetalles;
+
+	//bi-directional many-to-one association to VentCliente
+	@ManyToOne
+	@JoinColumn(name="cedula_vent_cliente")
+	private VentCliente ventCliente;
+
+	public VentVenta() {
+	}
+
+	public Integer getIdVentVentas() {
+		return this.idVentVentas;
+	}
+
+	public void setIdVentVentas(Integer idVentVentas) {
+		this.idVentVentas = idVentVentas;
+	}
+
+	public Date getFechaVentas() {
+		return this.fechaVentas;
+	}
+
+	public void setFechaVentas(Date fechaVentas) {
+		this.fechaVentas = fechaVentas;
+	}
+
+	public Integer getIva() {
+		return this.iva;
+	}
+
+	public void setIva(Integer iva) {
+		this.iva = iva;
+	}
+
+	public BigDecimal getNeto() {
+		return this.neto;
+	}
+
+	public void setNeto(BigDecimal neto) {
+		this.neto = neto;
+	}
+
+	public BigDecimal getTotal() {
+		return this.total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+	public List<VentVentaDetalle> getVentVentaDetalles() {
+		return this.ventVentaDetalles;
+	}
+
+	public void setVentVentaDetalles(List<VentVentaDetalle> ventVentaDetalles) {
+		this.ventVentaDetalles = ventVentaDetalles;
+	}
+
+	public VentVentaDetalle addVentVentaDetalle(VentVentaDetalle ventVentaDetalle) {
+		getVentVentaDetalles().add(ventVentaDetalle);
+		ventVentaDetalle.setVentVenta(this);
+
+		return ventVentaDetalle;
+	}
+
+	public VentVentaDetalle removeVentVentaDetalle(VentVentaDetalle ventVentaDetalle) {
+		getVentVentaDetalles().remove(ventVentaDetalle);
+		ventVentaDetalle.setVentVenta(null);
+
+		return ventVentaDetalle;
+	}
+
+	public VentCliente getVentCliente() {
+		return this.ventCliente;
+	}
+
+	public void setVentCliente(VentCliente ventCliente) {
+		this.ventCliente = ventCliente;
+	}
+
+}
