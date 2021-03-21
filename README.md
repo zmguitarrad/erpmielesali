@@ -5,4 +5,4 @@ Sistema para el manejo de un apiario
 - Utiliza JavaEE 
 - IDE Eclipse 
 - Wildfly 
-- PostgeSQL
+- PostgreSQL
