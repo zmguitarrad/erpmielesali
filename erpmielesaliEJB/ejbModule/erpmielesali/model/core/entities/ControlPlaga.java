@@ -21,14 +21,14 @@ public class ControlPlaga implements Serializable {
 	private Integer idControlPlagas;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_revision")
-	private Date fechaRevision;
+	@Column(name="fecha_aplicacion")
+	private Date fechaAplicacion;
 
-	@Column(name="nombre_plaga", length=30)
+	@Column(length=50)
+	private String medicacion;
+
+	@Column(name="nombre_plaga", length=50)
 	private String nombrePlaga;
-
-	@Column(name="nombre_tratamiento", length=30)
-	private String nombreTratamiento;
 
 	//bi-directional many-to-one association to ControlColmena
 	@ManyToOne
@@ -46,12 +46,20 @@ public class ControlPlaga implements Serializable {
 		this.idControlPlagas = idControlPlagas;
 	}
 
-	public Date getFechaRevision() {
-		return this.fechaRevision;
+	public Date getFechaAplicacion() {
+		return this.fechaAplicacion;
 	}
 
-	public void setFechaRevision(Date fechaRevision) {
-		this.fechaRevision = fechaRevision;
+	public void setFechaAplicacion(Date fechaAplicacion) {
+		this.fechaAplicacion = fechaAplicacion;
+	}
+
+	public String getMedicacion() {
+		return this.medicacion;
+	}
+
+	public void setMedicacion(String medicacion) {
+		this.medicacion = medicacion;
 	}
 
 	public String getNombrePlaga() {
@@ -60,14 +68,6 @@ public class ControlPlaga implements Serializable {
 
 	public void setNombrePlaga(String nombrePlaga) {
 		this.nombrePlaga = nombrePlaga;
-	}
-
-	public String getNombreTratamiento() {
-		return this.nombreTratamiento;
-	}
-
-	public void setNombreTratamiento(String nombreTratamiento) {
-		this.nombreTratamiento = nombreTratamiento;
 	}
 
 	public ControlColmena getControlColmena() {

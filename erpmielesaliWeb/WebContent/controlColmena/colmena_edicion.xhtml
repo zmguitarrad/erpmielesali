@@ -9,23 +9,15 @@
 		type="preRenderView"></f:event>
 </f:metadata>
 <h:head>
-	<title>Producto</title>
+	<title>Colmena Edicion</title>
 </h:head>
 <body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
 	<h:form>
 		<p:menubar>
-			<p:menuitem value="Regresar" icon="pi pi-home"
-				action="/menu?faces-redirect=true" />
-			<p:menuitem value="Producto" icon="pi pi-users"
-				action="#{beanProdProducto.actionCargarMenuProductos()}"/>
-			<p:menuitem value="Tipos de Producto" icon="pi pi-users"
-				action="#{beanProdProducto.actionCargarMenuTipo()}"/>
-			<p:menuitem value="Stock" icon="pi pi-users"
-				action="#{beanProdAlmacen.actionCargarMenuAlmacen()}"/>	
-			<p:menuitem value="Módulos" icon="pi pi-slack"
-				action="#{beanSegModulos.actionCargarMenuModulos()}" />
-			<p:menuitem value="Asignaciones" icon="pi pi-list"
-				action="#{beanSegAsignaciones.actionMenuAsignaciones()}" />
+			<p:menuitem value="Regresar" icon="pi pi-home" action="colmena" />
 			<f:facet name="options">
 				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
 					icon="pi pi-user">
@@ -35,9 +27,22 @@
 				</p:menuButton>
 			</f:facet>
 		</p:menubar>
-		<p:staticMessage severity="info" summary="Módulo Producto"></p:staticMessage>
 	</h:form>
-	<div>
-	</div>
+	<p:panel>
+		<h:form>
+			<p:panelGrid columns="2">
+				<h:outputText value="Nombre de la colmena" />
+				<p:inputText value="#{beanControlColmena.edicionColmena.nombreColmena}"
+					required="true" requiredMessage="Ingrese el nombre de la colmena" />
+				<h:outputText value="Productora" />
+				<p:inputText value="#{beanControlColmena.edicionColmena.productora}"
+					required="true" requiredMessage="Ingresea que se dedica la colmena" />
+
+
+				<p:commandButton value="Actualizar" icon="pi pi-save" update="@form"
+					actionListener="#{beanControlColmena.actionListenerEdicionColmena()}"></p:commandButton>
+			</p:panelGrid>
+		</h:form>
+	</p:panel>
 </body>
 </html>

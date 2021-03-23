@@ -13,6 +13,7 @@ import erpmielesali.model.core.entities.ProdProducto;
 import erpmielesali.model.core.entities.ProdTipoProducto;
 import erpmielesali.model.core.entities.SegUsuario;
 import erpmielesali.model.core.entities.ThmEmpleado;
+import erpmielesali.model.core.entities.VentDireccion;
 import erpmielesali.model.core.managers.ManagerDAO;
 
 /**
@@ -63,7 +64,7 @@ public class ManagerProdProducto {
     
     	 //listar
     public List<ProdProducto>findAllProdProducto(){
-    	return mDAO.findAll(ProdProducto.class);
+    	return mDAO.findAll(ProdProducto.class,"codigoProdProduct");
     	
     }
     		//listar por byid
@@ -71,6 +72,12 @@ public class ManagerProdProducto {
     	return(ProdProducto) mDAO.findById(ProdProducto.class, codigoProdProduct);
     	
     }
+    	//listar para stock
+    public List<ProdProducto> findAllAllProductoStock(){
+    	return mDAO.findAll(ProdProducto.class, "codigoProdProduct");
+    }
+
+
     	//crear producto
     public ProdProducto insertarProducto(ProdProducto nuevoProducto, int idProdTipoProducto) throws Exception {
     	ProdProducto producto=new ProdProducto();
