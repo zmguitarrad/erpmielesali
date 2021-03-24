@@ -36,8 +36,8 @@ public class ManagerControlColmena {
     	return mDAO.findAll(ControlColmena.class);
     }
     	//listar byId
-    public ControlColmena findByIdControlColmena(int idControlColmena) throws Exception{
-    	return (ControlColmena)mDAO.findById(ControlColmena.class, idControlColmena);
+    public ControlColmena findByIdControlColmena(String nombreColmena) throws Exception{
+    	return (ControlColmena)mDAO.findById(ControlColmena.class, nombreColmena);
     }
     	/////////cargar datos////
     
@@ -58,21 +58,21 @@ public class ManagerControlColmena {
     }
     
     	//eliminar colmena
-    public void eliminarColmena(int idControlColmena) throws Exception {
-    	mDAO.eliminar(ControlColmena.class, idControlColmena);
+    public void eliminarColmena(String nombreColmena) throws Exception {
+    	mDAO.eliminar(ControlColmena.class, nombreColmena);
     }
     
     //editar colmena
     public void actualizarColmena(ControlColmena edicionControl) throws Exception {
-    	ControlColmena colmena=(ControlColmena)mDAO.findById(ControlColmena.class, edicionControl.getIdControlColmena());
+    	ControlColmena colmena=(ControlColmena)mDAO.findById(ControlColmena.class, edicionControl.getNombreColmena());
     	colmena.setProductora(edicionControl.getProductora());
     	colmena.setFechaCreacion(edicionControl.getFechaCreacion());
     	mDAO.actualizar(colmena);
     	
     }
     	//activar colmena
-    public void activarDesactivarColmena(int idControlColmena) throws Exception {
-    	ControlColmena colmena=(ControlColmena)mDAO.findById(ControlColmena.class, idControlColmena);
+    public void activarDesactivarColmena(String controlColmena) throws Exception {
+    	ControlColmena colmena=(ControlColmena)mDAO.findById(ControlColmena.class, controlColmena);
     	colmena.setColmenaActivo(!colmena.getColmenaActivo());
     	System.out.println("activar/desactivar "+colmena.getColmenaActivo());
     	mDAO.actualizar(colmena);
@@ -86,7 +86,7 @@ public class ManagerControlColmena {
     }
     
     	//crear tarea
- 	public ControlTarea insertarTarea( ControlTarea nuevaTarea, int idControlColmena) throws Exception {
+ 	public ControlTarea insertarTarea( ControlTarea nuevaTarea, String idControlColmena) throws Exception {
  		ControlTarea tarea=new ControlTarea();
  		tarea.setControlColmena(findByIdControlColmena(idControlColmena));
  		tarea.setDescripcionTarea(nuevaTarea.getDescripcionTarea());
@@ -124,7 +124,7 @@ public class ManagerControlColmena {
     	return mDAO.findAll(ControlPlaga.class);
     }
     	//insertar plaga
-	public ControlPlaga insertarPlaga( ControlPlaga nuevaPlaga, int idControlColmena) throws Exception {
+	public ControlPlaga insertarPlaga( ControlPlaga nuevaPlaga, String idControlColmena) throws Exception {
 		ControlPlaga plaga=new ControlPlaga();
 		plaga.setControlColmena(findByIdControlColmena(idControlColmena));
 		plaga.setNombrePlaga(nuevaPlaga.getNombrePlaga());

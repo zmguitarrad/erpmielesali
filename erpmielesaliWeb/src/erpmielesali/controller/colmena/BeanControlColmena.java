@@ -29,7 +29,7 @@ public class BeanControlColmena implements Serializable {
 	private ControlTarea nuevaTarea;
 	private ControlTarea edicionTarea;
 	private List<ControlTarea>listaTarea;
-	private int IdControlColmena;
+	private String IdControlColmena;
 	private List<ControlPlaga>listaPLaga;
 	private ControlPlaga nuevaPlaga;
 	private ControlPlaga edicionPLaga;
@@ -77,7 +77,7 @@ public class BeanControlColmena implements Serializable {
 		}
 	}
 		//eliminar
-	public void actionListenerEliminarColmena(int idControlColmena) {
+	public void actionListenerEliminarColmena(String idControlColmena) {
 		try {
 			mColmena.eliminarColmena(idControlColmena);
 			listaColmena=mColmena.findAllControlColmena();
@@ -105,7 +105,7 @@ public class BeanControlColmena implements Serializable {
 		}
 	}
 		//activar/desactivar colmena
-	public void actionLIstenerActivarDesactivarColmena(int idControlColmena) {
+	public void actionLIstenerActivarDesactivarColmena(String idControlColmena) {
 		try {
 			mColmena.activarDesactivarColmena(idControlColmena);
 			listaColmena=mColmena.findAllControlColmena();
@@ -261,10 +261,12 @@ public class BeanControlColmena implements Serializable {
 	public void setListaTarea(List<ControlTarea> listaTarea) {
 		this.listaTarea = listaTarea;
 	}
-	public int getIdControlColmena() {
+	
+
+	public String getIdControlColmena() {
 		return IdControlColmena;
 	}
-	public void setIdControlColmena(int idControlColmena) {
+	public void setIdControlColmena(String idControlColmena) {
 		IdControlColmena = idControlColmena;
 	}
 	public ControlTarea getEdicionTarea() {

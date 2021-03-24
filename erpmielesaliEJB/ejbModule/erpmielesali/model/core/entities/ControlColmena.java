@@ -17,9 +17,8 @@ public class ControlColmena implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_control_colmena", unique=true, nullable=false)
-	private Integer idControlColmena;
+	@Column(name="nombre_colmena", unique=true, nullable=false, length=8)
+	private String nombreColmena;
 
 	@Column(name="colmena_activo")
 	private Boolean colmenaActivo;
@@ -27,9 +26,6 @@ public class ControlColmena implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_creacion")
 	private Date fechaCreacion;
-
-	@Column(name="nombre_colmena", length=10)
-	private String nombreColmena;
 
 	@Column(length=30)
 	private String productora;
@@ -45,12 +41,12 @@ public class ControlColmena implements Serializable {
 	public ControlColmena() {
 	}
 
-	public Integer getIdControlColmena() {
-		return this.idControlColmena;
+	public String getNombreColmena() {
+		return this.nombreColmena;
 	}
 
-	public void setIdControlColmena(Integer idControlColmena) {
-		this.idControlColmena = idControlColmena;
+	public void setNombreColmena(String nombreColmena) {
+		this.nombreColmena = nombreColmena;
 	}
 
 	public Boolean getColmenaActivo() {
@@ -67,14 +63,6 @@ public class ControlColmena implements Serializable {
 
 	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
-	}
-
-	public String getNombreColmena() {
-		return this.nombreColmena;
-	}
-
-	public void setNombreColmena(String nombreColmena) {
-		this.nombreColmena = nombreColmena;
 	}
 
 	public String getProductora() {

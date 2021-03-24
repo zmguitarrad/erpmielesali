@@ -55,12 +55,12 @@
 					<p:commandButton icon="pi pi-check-circle"
 						title="activar/desactivar" styleClass="ui-button-warning"
 						update="@form"
-						actionListener="#{beanControlColmena.actionLIstenerActivarDesactivarColmena(colmena.idControlColmena)}" />
+						actionListener="#{beanControlColmena.actionLIstenerActivarDesactivarColmena(colmena.nombreColmena)}" />
 					<p:commandButton icon="pi pi-pencil" title="editar"
 						action="#{beanControlColmena.actionSeleccionrEdicionColmena(colmena)}" />		
 					<p:commandButton icon="pi pi-times-circle" title="eliminar"
 						styleClass="ui-button-danger" update="@form"
-						actionListener="#{beanControlColmena.actionListenerEliminarColmena(colmena.idControlColmena)}">
+						actionListener="#{beanControlColmena.actionListenerEliminarColmena(colmena.nombreColmena)}">
 
 						<p:confirm header="Confirmación"
 							message="Desea borrar la colmena?" icon="pi pi-info-circle" />

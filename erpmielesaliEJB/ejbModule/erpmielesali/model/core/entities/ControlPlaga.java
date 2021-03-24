@@ -32,7 +32,7 @@ public class ControlPlaga implements Serializable {
 
 	//bi-directional many-to-one association to ControlColmena
 	@ManyToOne
-	@JoinColumn(name="id_control_colmena")
+	@JoinColumn(name="nombre_colmena")
 	private ControlColmena controlColmena;
 
 	public ControlPlaga() {

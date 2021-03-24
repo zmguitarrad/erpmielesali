@@ -33,15 +33,15 @@ public class GastGasto implements Serializable {
 	@Column(name="valor_gastos", precision=3, scale=2)
 	private BigDecimal valorGastos;
 
-	//bi-directional many-to-one association to GastTipoGasto
-	@ManyToOne
-	@JoinColumn(name="id_gast_tipo_gasto")
-	private GastTipoGasto gastTipoGasto;
-
 	//bi-directional many-to-one association to GastMetodoPago
 	@ManyToOne
 	@JoinColumn(name="id_gast_metodo_pago")
 	private GastMetodoPago gastMetodoPago;
+
+	//bi-directional many-to-one association to GastTipoGasto
+	@ManyToOne
+	@JoinColumn(name="id_gast_tipo_gasto")
+	private GastTipoGasto gastTipoGasto;
 
 	public GastGasto() {
 	}
@@ -86,20 +86,20 @@ public class GastGasto implements Serializable {
 		this.valorGastos = valorGastos;
 	}
 
-	public GastTipoGasto getGastTipoGasto() {
-		return this.gastTipoGasto;
-	}
-
-	public void setGastTipoGasto(GastTipoGasto gastTipoGasto) {
-		this.gastTipoGasto = gastTipoGasto;
-	}
-
 	public GastMetodoPago getGastMetodoPago() {
 		return this.gastMetodoPago;
 	}
 
 	public void setGastMetodoPago(GastMetodoPago gastMetodoPago) {
 		this.gastMetodoPago = gastMetodoPago;
+	}
+
+	public GastTipoGasto getGastTipoGasto() {
+		return this.gastTipoGasto;
+	}
+
+	public void setGastTipoGasto(GastTipoGasto gastTipoGasto) {
+		this.gastTipoGasto = gastTipoGasto;
 	}
 
 }
