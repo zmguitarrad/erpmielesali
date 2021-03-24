@@ -88,7 +88,7 @@ public class BeanGasto implements Serializable {
 		try {
 			mGasto.actualizarGasto(edicionGasto, idGastTipoGasto, idGastMetodoPago, fecha);
 			listaGastos = mGasto.findAllGastGasto();
-			JSFUtil.crearMensajeINFO("Cliente editado.");
+			JSFUtil.crearMensajeINFO("Gasto editado.");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeERROR(e.getMessage());
 			e.printStackTrace();

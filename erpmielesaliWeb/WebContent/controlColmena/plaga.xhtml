@@ -9,7 +9,7 @@
 		type="preRenderView"></f:event>
 </f:metadata>
 <h:head>
-	<title>Tipo Producto</title>
+	<title>Plagas</title>
 </h:head>
 <body>
 	<p:growl>
@@ -32,32 +32,60 @@
 	<p:panel>
 		<p:commandButton value="Nuevo" icon="pi pi-plus" id="cmdNuevo"></p:commandButton>
 		<p:overlayPanel for="cmdNuevo" showCloseIcon="true">
-			<h:form>
+				<h:form>
 			<p:panelGrid columns="2">
-				<h:outputText value="Categoria" />
-				<p:inputText value="#{beanProdProducto.nuevoTipo.nombreTipoProducto}"
-					required="true" requiredMessage="Ingrese la categoria del producto" />
+				<h:outputText value="Seleccione la colmena:" />
+					<p:selectOneMenu value="#{beanControlColmena.idControlColmena}">
+						<f:selectItem itemLabel="Seleccione..." noSelectionOption="true" />
+						<f:selectItems value="#{beanControlColmena.listaColmena}"
+							var="t" itemLabel="#{t.nombreColmena}"
+							itemValue="#{t.idControlColmena}"></f:selectItems>
+					</p:selectOneMenu>	
+
+				<h:outputText value="Plaga " />
+				<p:inputText value="#{beanControlColmena.nuevaPlaga.nombrePlaga}"
+					required="true" requiredMessage="Nombre de la plaga" />
+				<h:outputText value="Medicamento" />
+				<p:inputText value="#{beanControlColmena.nuevaPlaga.medicacion}"
+					required="true" requiredMessage="Tratamiento" />
+				<h:outputText value="Fecha" />
+				<p:calendar value="#{beanControlColmena.nuevaPlaga.fechaAplicacion}" showTime="true"></p:calendar> />
 					<p:commandButton value="Guardar" icon="pi pi-save"
-						actionListener="#{beanProdProducto.actionListenerInsertarNuevoTipo()}"
+						actionListener="#{beanControlColmena.actionListenerInsertarNuevaPlaga()}"
 						update="@form:,formDatos"></p:commandButton>
 				</p:panelGrid>
 			</h:form>
+	
+		
 		</p:overlayPanel>
 		<h:form id="formDatos">
-			<p:dataTable emptyMessage="No hay registros aún." value="#{beanProdProducto.listaTipo}" var="tipo">
+			<p:dataTable emptyMessage="No hay registros aún." value="#{beanControlColmena.listaPLaga}" var="plaga">
 				<p:column headerText="ID " style="width:40px">
-					<h:outputText value="#{tipo.idProdTipoProducto}" />
+					<h:outputText value="#{plaga.idControlPlagas}" />
 				</p:column>
-				<p:column headerText="Categoria">
-					<h:outputText value="#{tipo.nombreTipoProducto}" />
+				<p:column headerText="Colmena">
+					<h:outputText value="#{plaga.controlColmena.nombreColmena}" />
+				</p:column>
+				<p:column headerText="Plaga">
+					<h:outputText value="#{plaga.nombrePlaga}" />
+				</p:column>
+					<p:column headerText="Medicamento">
+					<h:outputText value="#{plaga.medicacion}" />
+				</p:column>
+				<p:column headerText="Fecha de Aplicación">
+					<h:outputText value="#{plaga.fechaAplicacion}" />
 				</p:column>
 				
-				<p:column headerText="OPCIONES">		
+					<p:column headerText="OPCIONES">
+					<p:commandButton icon="pi pi-pencil" title="editar"
+						action="#{beanControlColmena.actionSeleccionEdicionPlaga(plaga)}" />		
 					<p:commandButton icon="pi pi-times-circle" title="eliminar"
 						styleClass="ui-button-danger" update="@form"
-						actionListener="#{beanProdProducto.actionListenerEliminarTipo(tipo.idProdTipoProducto)}">
+						actionListener="#{beanControlColmena.actionListenerEliminarPlaga(plaga.idControlPlagas)}">
+				
+
 						<p:confirm header="Confirmación"
-							message="Desea borrar la categoria?" icon="pi pi-info-circle" />
+							message="Desea borrar el dato del control del apiario?" icon="pi pi-info-circle" />
 					</p:commandButton>
 				</p:column>
 				

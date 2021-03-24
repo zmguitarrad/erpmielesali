@@ -34,9 +34,7 @@
 		<h:form>
 			<p:dataTable value="#{beanControlColmena.listaColmena}" var="colmena"
 				paginator="true" rows="5">
-				<p:column headerText="ID">
-					<h:outputText value="#{colmena.idControlColmena}" />
-				</p:column>
+				
 				<p:column headerText="Nombre" filterBy="#{colmena.nombreColmena}"
 					filterMatchMode="contains">
 					<h:outputText value="#{colmena.nombreColmena}" />
@@ -65,7 +63,7 @@
 						actionListener="#{beanControlColmena.actionListenerEliminarColmena(colmena.idControlColmena)}">
 
 						<p:confirm header="Confirmación"
-							message="Desea borrar este producto?" icon="pi pi-info-circle" />
+							message="Desea borrar la colmena?" icon="pi pi-info-circle" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>

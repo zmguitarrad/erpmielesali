@@ -45,8 +45,11 @@
 					filterMatchMode="contains">
 					<h:outputText value="#{stock.unidadesProducidas}" />
 				</p:column>
-				<h:outputText value="Fecha" />
-				<p:datePicker value="#{beanProdAlmacen.fecha}" showTime="true" />
+				
+				<p:column headerText="FECHA">
+					<h:outputText value="#{stock.fechaActualizacion}" />
+				</p:column>
+
 				<p:column headerText="OPCIONES">
 					<p:commandButton icon="pi pi-check-circle"
 						title="activar/desactivar" styleClass="ui-button-warning"

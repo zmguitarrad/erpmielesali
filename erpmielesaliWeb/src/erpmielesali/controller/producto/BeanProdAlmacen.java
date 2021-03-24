@@ -35,8 +35,8 @@ public class BeanProdAlmacen implements Serializable {
 	}
 	@PostConstruct
 	public void inicializador() {
-		listaProducto=mProducto.findAllProdProducto();
-		listaTipo=mProducto.findAllProdTipo();
+		//listaProducto=mProducto.findAllProdProducto();
+		//listaTipo=mProducto.findAllProdTipo();
 		listaStock=mAlmacen.findAllProdAlmacen();
 		
 	

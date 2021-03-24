@@ -9,7 +9,7 @@
 		type="preRenderView"></f:event>
 </f:metadata>
 <h:head>
-	<title>Colmena Edicion</title>
+	<title>Tarea Edicion</title>
 </h:head>
 <body>
 	<p:growl>
@@ -17,7 +17,7 @@
 	</p:growl>
 	<h:form>
 		<p:menubar>
-			<p:menuitem value="Regresar" icon="pi pi-home" action="colmena" />
+			<p:menuitem value="Regresar" icon="pi pi-home" action="plaga" />
 			<f:facet name="options">
 				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
 					icon="pi pi-user">
@@ -31,16 +31,25 @@
 	<p:panel>
 		<h:form>
 			<p:panelGrid columns="2">
+			<h:outputText value="Seleccione la colmena:" />
+					<p:selectOneMenu value="#{beanControlColmena.idControlColmena}">
+						<f:selectItem itemLabel="Seleccione..." noSelectionOption="true" />
+						<f:selectItems value="#{beanControlColmena.listaColmena}"
+							var="t" itemLabel="#{t.nombreColmena}"
+							itemValue="#{t.idControlColmena}"></f:selectItems>
+					</p:selectOneMenu>	
 
-				<h:outputText value="Productora" />
-				<p:inputText value="#{beanControlColmena.edicionColmena.productora}"
-					required="true" requiredMessage="Ingresea que se dedica la colmena" />
-				<h:outputText value="Fecha" />
-					<p:calendar value="#{beanControlColmena.edicionColmena.fechaCreacion}" showTime="true"></p:calendar> 
-
+					<h:outputText value="Plaga " />
+						<p:inputText value="#{beanControlColmena.edicionPLaga.nombrePlaga}"
+					required="true" requiredMessage="Plaga" />
+					<h:outputText value="Medicamento" />
+					<p:inputText value="#{beanControlColmena.edicionPLaga.medicacion}"
+					required="true" requiredMessage="Tratamiento" />
+						<h:outputText value="Fecha" />
+					<p:calendar value="#{beanControlColmena.edicionPLaga.fechaAplicacion}" showTime="true"></p:calendar> 
 
 				<p:commandButton value="Actualizar" icon="pi pi-save" update="@form"
-					actionListener="#{beanControlColmena.actionListenerEdicionColmena()}"></p:commandButton>
+					actionListener="#{beanControlColmena.actionListenerEdicionPlaga()}"></p:commandButton>
 			</p:panelGrid>
 		</h:form>
 	</p:panel>

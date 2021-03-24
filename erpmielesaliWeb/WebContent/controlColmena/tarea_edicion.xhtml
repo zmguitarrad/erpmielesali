@@ -9,7 +9,7 @@
 		type="preRenderView"></f:event>
 </f:metadata>
 <h:head>
-	<title>Nueva Colmena</title>
+	<title>Tarea Edicion</title>
 </h:head>
 <body>
 	<p:growl>
@@ -17,7 +17,7 @@
 	</p:growl>
 	<h:form>
 		<p:menubar>
-			<p:menuitem value="Regresar" icon="pi pi-home" action="colmena" />
+			<p:menuitem value="Regresar" icon="pi pi-home" action="tarea" />
 			<f:facet name="options">
 				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
 					icon="pi pi-user">
@@ -31,18 +31,22 @@
 	<p:panel>
 		<h:form>
 			<p:panelGrid columns="2">
-				<h:outputText value="Nombre de Colmena" />
-				<p:inputText value="#{beanControlColmena.nuevoColmena.nombreColmena}"
-					required="true" requiredMessage="Ingrese  en formato COLM-001 por ejemplo" />
+				<h:outputText value="Seleccione la colmena:" />
+					<p:selectOneMenu value="#{beanControlColmena.idControlColmena}">
+						<f:selectItem itemLabel="Seleccione..." noSelectionOption="true" />
+						<f:selectItems value="#{beanControlColmena.listaColmena}"
+							var="t" itemLabel="#{t.nombreColmena}"
+							itemValue="#{t.idControlColmena}"></f:selectItems>
+					</p:selectOneMenu>	
+			
+					<h:outputText value="Descripcion " />
+						<p:inputText value="#{beanControlColmena.edicionTarea.descripcionTarea}"
+					required="true" requiredMessage="Descripcion de tarea" />
+					<h:outputText value="Fecha" />
+					<p:calendar value="#{beanControlColmena.edicionTarea.fechaTarea}" showTime="true"></p:calendar> 
 
-				<h:outputText value="Productora" />
-				<p:inputText value="#{beanControlColmena.nuevoColmena.productora}"
-					required="true" requiredMessage="Ingrese a que se dedica la colmuna" />
-				<h:outputText value="Fecha" />
-				<p:calendar value="#{beanControlColmena.fecha}" showTime="true"></p:calendar> 
-
-				<p:commandButton value="Guardar" icon="pi pi-save" update="@form"
-					actionListener="#{beanControlColmena.actionListenerNuevoColmena()}"></p:commandButton>
+				<p:commandButton value="Actualizar" icon="pi pi-save" update="@form"
+					actionListener="#{beanControlColmena.actionListenerEdicionTarea()}"></p:commandButton>
 			</p:panelGrid>
 		</h:form>
 	</p:panel>

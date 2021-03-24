@@ -18,10 +18,10 @@
 				action="/menu?faces-redirect=true" />
 			<p:menuitem value="Colmena" icon="pi pi-users"
 				action="#{beanControlColmena.actionCargarMenuColmena()}"/>
-			<p:menuitem value="Módulos" icon="pi pi-slack"
-				action="#{beanSegModulos.actionCargarMenuModulos()}" />
-			<p:menuitem value="Asignaciones" icon="pi pi-list"
-				action="#{beanSegAsignaciones.actionMenuAsignaciones()}" />
+			<p:menuitem value="Tareas" icon="pi pi-slack"
+				action="#{beanControlColmena.actionCargarMenuTarea()}" />
+			<p:menuitem value="Apiario" icon="pi pi-list"
+				action="#{beanControlColmena.actionCargarMenuPlaga()}" />
 			<f:facet name="options">
 				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
 					icon="pi pi-user">
