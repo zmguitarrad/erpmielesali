@@ -20,15 +20,16 @@ public class VentVentaDetalle implements Serializable {
 	@Column(name="id_vent_venta_detalle", unique=true, nullable=false)
 	private Integer idVentVentaDetalle;
 
-	private Integer cantidad;
+	@Column(name="cantidad_vendidas")
+	private Integer cantidadVendidas;
 
 	@Column(precision=3, scale=2)
 	private BigDecimal subtotal;
 
-	//bi-directional many-to-one association to ProdProducto
+	//bi-directional many-to-one association to ProdStock
 	@ManyToOne
-	@JoinColumn(name="codigo_prod_product", nullable=false)
-	private ProdProducto prodProducto;
+	@JoinColumn(name="id_prod_stock", nullable=false)
+	private ProdStock prodStock;
 
 	//bi-directional many-to-one association to VentVenta
 	@ManyToOne
@@ -46,12 +47,12 @@ public class VentVentaDetalle implements Serializable {
 		this.idVentVentaDetalle = idVentVentaDetalle;
 	}
 
-	public Integer getCantidad() {
-		return this.cantidad;
+	public Integer getCantidadVendidas() {
+		return this.cantidadVendidas;
 	}
 
-	public void setCantidad(Integer cantidad) {
-		this.cantidad = cantidad;
+	public void setCantidadVendidas(Integer cantidadVendidas) {
+		this.cantidadVendidas = cantidadVendidas;
 	}
 
 	public BigDecimal getSubtotal() {
@@ -62,12 +63,12 @@ public class VentVentaDetalle implements Serializable {
 		this.subtotal = subtotal;
 	}
 
-	public ProdProducto getProdProducto() {
-		return this.prodProducto;
+	public ProdStock getProdStock() {
+		return this.prodStock;
 	}
 
-	public void setProdProducto(ProdProducto prodProducto) {
-		this.prodProducto = prodProducto;
+	public void setProdStock(ProdStock prodStock) {
+		this.prodStock = prodStock;
 	}
 
 	public VentVenta getVentVenta() {

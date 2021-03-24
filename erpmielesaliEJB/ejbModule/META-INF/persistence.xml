@@ -7,6 +7,7 @@
 		<class>erpmielesali.model.core.entities.ControlPlaga</class>
 		<class>erpmielesali.model.core.entities.ControlTarea</class>
 		<class>erpmielesali.model.core.entities.GastGasto</class>
+		<class>erpmielesali.model.core.entities.GastMetodoPago</class>
 		<class>erpmielesali.model.core.entities.GastTipoGasto</class>
 		<class>erpmielesali.model.core.entities.ProdProducto</class>
 		<class>erpmielesali.model.core.entities.ProdStock</class>

@@ -18,18 +18,15 @@ public class VentVenta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_vent_ventas", unique=true, nullable=false)
-	private Integer idVentVentas;
+	@Column(name="id_vent_ventas", unique=true, nullable=false, length=10)
+	private String idVentVentas;
+
+	@Column(precision=3, scale=2)
+	private BigDecimal descuento;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_ventas")
 	private Date fechaVentas;
-
-	private Integer iva;
-
-	@Column(precision=3, scale=2)
-	private BigDecimal neto;
 
 	@Column(precision=3, scale=2)
 	private BigDecimal total;
@@ -46,12 +43,20 @@ public class VentVenta implements Serializable {
 	public VentVenta() {
 	}
 
-	public Integer getIdVentVentas() {
+	public String getIdVentVentas() {
 		return this.idVentVentas;
 	}
 
-	public void setIdVentVentas(Integer idVentVentas) {
+	public void setIdVentVentas(String idVentVentas) {
 		this.idVentVentas = idVentVentas;
+	}
+
+	public BigDecimal getDescuento() {
+		return this.descuento;
+	}
+
+	public void setDescuento(BigDecimal descuento) {
+		this.descuento = descuento;
 	}
 
 	public Date getFechaVentas() {
@@ -60,22 +65,6 @@ public class VentVenta implements Serializable {
 
 	public void setFechaVentas(Date fechaVentas) {
 		this.fechaVentas = fechaVentas;
-	}
-
-	public Integer getIva() {
-		return this.iva;
-	}
-
-	public void setIva(Integer iva) {
-		this.iva = iva;
-	}
-
-	public BigDecimal getNeto() {
-		return this.neto;
-	}
-
-	public void setNeto(BigDecimal neto) {
-		this.neto = neto;
 	}
 
 	public BigDecimal getTotal() {

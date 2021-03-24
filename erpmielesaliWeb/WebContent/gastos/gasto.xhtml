@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:metadata>
+	<f:event listener="#{beanSegLogin.actionVerificarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata>
+<h:head>
+	<title>Gastos Consulta y agregacion</title>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-home" action="menu" />
+			<f:facet name="options">
+				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
+					icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"
+						action="#{beanSegLogin.actionCerrarSesion()}"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+	<p:panel>
+		<p:commandButton value="Nuevo" icon="pi pi-plus" id="cmdNuevo"></p:commandButton>
+		<p:overlayPanel for="cmdNuevo" showCloseIcon="true">
+				<h:form>
+				<p:panelGrid columns="2">
+					
+					<h:outputText value="Seleccione el tipo de gasto:" />
+					<p:selectOneMenu value="#{beanGasto.idGastTipoGasto}">
+						<f:selectItem itemLabel="Seleccione..." noSelectionOption="true" />
+						<f:selectItems value="#{beanGasto.listaTiposGasto}"
+							var="u" itemLabel="#{u.nombreGastos}"
+							itemValue="#{u.idGastTipoGasto}"></f:selectItems>
+					</p:selectOneMenu>
+					
+					<h:outputText value="Seleccione el metodo de pago:" />
+					<p:selectOneMenu value="#{beanGasto.idGastMetodoPago}">
+						<f:selectItem itemLabel="Seleccione..." noSelectionOption="true" />
+						<f:selectItems value="#{beanGasto.listaMetodoPago}"
+							var="m" itemLabel="#{m.metodoPago} "
+							itemValue="#{m.idGastMetodoPago}"></f:selectItems>
+					</p:selectOneMenu>
+					
+					<h:outputText value="Descripcion de gastos" />
+					<p:inputText value="#{beanGasto.nuevoGasto.descripcionGastos}"
+					required="true" requiredMessage="Ingrese descripcion del gasto" />
+					
+					<h:outputText value="Fecha" />
+					<p:calendar value="#{beanGasto.fecha}" showTime="true"></p:calendar> />
+					
+					<h:outputText value="Valor de gasto" />
+					<p:inputText value="#{beanGasto.nuevoGasto.valorGastos}"
+					required="true" requiredMessage="Ingrese el valor del gasto" />
+					
+					<p:commandButton value="Guardar" icon="pi pi-save"
+						actionListener="#{beanGasto.actionListenerNuevoGasto()}"
+						update="@form:,formDatos"></p:commandButton>
+				
+				</p:panelGrid>
+				
+				</h:form>
+		</p:overlayPanel>
+		<h:form id="formDatos">
+				
+			<p:dataTable value="#{beanGasto.listaGastos}" var="g"
+				paginator="true" rows="5">
+				<p:column headerText="ID">
+					<h:outputText value="#{g.idGastGastos}" />
+				</p:column>
+				<p:column headerText="Tipo de Gasto" filterBy="#{g.gastTipoGasto}"
+					filterMatchMode="contains">
+					<h:outputText value="#{g.gastTipoGasto.nombreGastos}" />
+				</p:column>
+					<p:column headerText="Tipo de pago" filterBy="#{g.gastMetodoPago}"
+					filterMatchMode="contains">
+					<h:outputText value="#{g.gastMetodoPago.metodoPago}" />
+				</p:column>
+				<p:column headerText="Descripcion del gasto" filterBy="#{g.descripcionGastos}"
+					filterMatchMode="contains">
+					<h:outputText value="#{g.descripcionGastos}" />
+				</p:column>
+				<p:column headerText="Fecha Gasto" filterBy="#{g.gastoFecha}"
+					filterMatchMode="contains">
+					<h:outputText value="#{g.gastoFecha}" />
+				</p:column>
+				<p:column headerText="Total gastos">
+					<h:outputText value="#{g.valorGastos}" />
+				</p:column>
+				<p:column headerText="estado">
+					<h:outputText value="#{g.estado}" />
+				</p:column>
+				<p:column headerText="OPCIONES">
+					<p:commandButton icon="pi pi-check-circle"
+						title="activar/desactivar" styleClass="ui-button-warning"
+						update="@form"
+						actionListener="#{beanGasto.actionLIstenerActivarDesactivarGasto(g.idGastGastos)}" />
+					<p:commandButton icon="pi pi-pencil" title="editar"
+						action= "#{beanGasto.actionListenerCargarGastos(g)}"/>
+					<p:commandButton icon="pi pi-times-circle" title="eliminar"
+						styleClass="ui-button-danger" update="@form"
+						actionListener = "#{beanGasto.actionListenerEliminarGasto(g.idGastGastos)}">
+						<p:confirm header="Confirmación"
+							message="Desea borrar cliente?" icon="pi pi-info-circle" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+		responsive="true" width="350">
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no ui-button-flat" />
+		<p:commandButton value="Sí" type="button"
+			styleClass="ui-confirmdialog-yes" />
+	</p:confirmDialog>
+	</p:panel>	
+</body>
+</html>

@@ -3,6 +3,7 @@ package erpmielesali.model.core.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -31,6 +32,10 @@ public class ProdStock implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="codigo_prod_product")
 	private ProdProducto prodProducto;
+
+	//bi-directional many-to-one association to VentVentaDetalle
+	@OneToMany(mappedBy="prodStock")
+	private List<VentVentaDetalle> ventVentaDetalles;
 
 	public ProdStock() {
 	}
@@ -65,6 +70,28 @@ public class ProdStock implements Serializable {
 
 	public void setProdProducto(ProdProducto prodProducto) {
 		this.prodProducto = prodProducto;
+	}
+
+	public List<VentVentaDetalle> getVentVentaDetalles() {
+		return this.ventVentaDetalles;
+	}
+
+	public void setVentVentaDetalles(List<VentVentaDetalle> ventVentaDetalles) {
+		this.ventVentaDetalles = ventVentaDetalles;
+	}
+
+	public VentVentaDetalle addVentVentaDetalle(VentVentaDetalle ventVentaDetalle) {
+		getVentVentaDetalles().add(ventVentaDetalle);
+		ventVentaDetalle.setProdStock(this);
+
+		return ventVentaDetalle;
+	}
+
+	public VentVentaDetalle removeVentVentaDetalle(VentVentaDetalle ventVentaDetalle) {
+		getVentVentaDetalles().remove(ventVentaDetalle);
+		ventVentaDetalle.setProdStock(null);
+
+		return ventVentaDetalle;
 	}
 
 }

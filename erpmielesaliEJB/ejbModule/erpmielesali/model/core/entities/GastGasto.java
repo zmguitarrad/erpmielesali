@@ -30,16 +30,18 @@ public class GastGasto implements Serializable {
 	@Column(name="gasto_fecha")
 	private Date gastoFecha;
 
-	@Column(name="metodo_pago", length=20)
-	private String metodoPago;
-
-	@Column(name="total_gastos", precision=3, scale=2)
-	private BigDecimal totalGastos;
+	@Column(name="valor_gastos", precision=3, scale=2)
+	private BigDecimal valorGastos;
 
 	//bi-directional many-to-one association to GastTipoGasto
 	@ManyToOne
 	@JoinColumn(name="id_gast_tipo_gasto")
 	private GastTipoGasto gastTipoGasto;
+
+	//bi-directional many-to-one association to GastMetodoPago
+	@ManyToOne
+	@JoinColumn(name="id_gast_metodo_pago")
+	private GastMetodoPago gastMetodoPago;
 
 	public GastGasto() {
 	}
@@ -76,20 +78,12 @@ public class GastGasto implements Serializable {
 		this.gastoFecha = gastoFecha;
 	}
 
-	public String getMetodoPago() {
-		return this.metodoPago;
+	public BigDecimal getValorGastos() {
+		return this.valorGastos;
 	}
 
-	public void setMetodoPago(String metodoPago) {
-		this.metodoPago = metodoPago;
-	}
-
-	public BigDecimal getTotalGastos() {
-		return this.totalGastos;
-	}
-
-	public void setTotalGastos(BigDecimal totalGastos) {
-		this.totalGastos = totalGastos;
+	public void setValorGastos(BigDecimal valorGastos) {
+		this.valorGastos = valorGastos;
 	}
 
 	public GastTipoGasto getGastTipoGasto() {
@@ -98,6 +92,14 @@ public class GastGasto implements Serializable {
 
 	public void setGastTipoGasto(GastTipoGasto gastTipoGasto) {
 		this.gastTipoGasto = gastTipoGasto;
+	}
+
+	public GastMetodoPago getGastMetodoPago() {
+		return this.gastMetodoPago;
+	}
+
+	public void setGastMetodoPago(GastMetodoPago gastMetodoPago) {
+		this.gastMetodoPago = gastMetodoPago;
 	}
 
 }

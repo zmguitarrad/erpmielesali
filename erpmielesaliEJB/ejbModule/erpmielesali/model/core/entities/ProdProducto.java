@@ -40,10 +40,6 @@ public class ProdProducto implements Serializable {
 	@OneToMany(mappedBy="prodProducto")
 	private List<ProdStock> prodStocks;
 
-	//bi-directional many-to-one association to VentVentaDetalle
-	@OneToMany(mappedBy="prodProducto")
-	private List<VentVentaDetalle> ventVentaDetalles;
-
 	public ProdProducto() {
 	}
 
@@ -115,28 +111,6 @@ public class ProdProducto implements Serializable {
 		prodStock.setProdProducto(null);
 
 		return prodStock;
-	}
-
-	public List<VentVentaDetalle> getVentVentaDetalles() {
-		return this.ventVentaDetalles;
-	}
-
-	public void setVentVentaDetalles(List<VentVentaDetalle> ventVentaDetalles) {
-		this.ventVentaDetalles = ventVentaDetalles;
-	}
-
-	public VentVentaDetalle addVentVentaDetalle(VentVentaDetalle ventVentaDetalle) {
-		getVentVentaDetalles().add(ventVentaDetalle);
-		ventVentaDetalle.setProdProducto(this);
-
-		return ventVentaDetalle;
-	}
-
-	public VentVentaDetalle removeVentVentaDetalle(VentVentaDetalle ventVentaDetalle) {
-		getVentVentaDetalles().remove(ventVentaDetalle);
-		ventVentaDetalle.setProdProducto(null);
-
-		return ventVentaDetalle;
 	}
 
 }

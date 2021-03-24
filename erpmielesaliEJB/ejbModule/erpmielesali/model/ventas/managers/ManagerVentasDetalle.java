@@ -9,7 +9,6 @@ import javax.ejb.Stateless;
 
 import erpmielesali.model.core.entities.VentCliente;
 import erpmielesali.model.core.entities.VentDireccion;
-import erpmielesali.model.core.entities.VentVenta;
 import erpmielesali.model.core.managers.ManagerDAO;
 
 
@@ -19,7 +18,7 @@ import erpmielesali.model.core.managers.ManagerDAO;
  */
 @Stateless
 @LocalBean
-public class ManagerVentasCliente {
+public class ManagerVentasDetalle {
 	@EJB
 	private ManagerDAO mDAO;
 	@EJB
@@ -28,11 +27,8 @@ public class ManagerVentasCliente {
     /**
      * Default constructor. 
      */
-    public ManagerVentasCliente() {
+    public ManagerVentasDetalle() {
         // TODO Auto-generated constructor stub
-    }
-    public VentCliente findByIdVentVenta(String cedulaVentCliente) throws Exception {
-    	return (VentCliente) mDAO.findById(VentCliente.class, cedulaVentCliente);
     }
     public List<VentCliente> findAllVentCliente(){
     	return mDAO.findAll(VentCliente.class, "nombreCliente");
