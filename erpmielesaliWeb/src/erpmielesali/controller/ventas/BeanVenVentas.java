@@ -29,6 +29,7 @@ public class BeanVenVentas implements Serializable {
 	private String  idVentVentas;
 	private String  cedulaVentCliente;
 	private VentVenta nuevaVenta;
+	private VentVenta edicionVenta;
 
 
 	public BeanVenVentas() {
@@ -119,6 +120,14 @@ public class BeanVenVentas implements Serializable {
 
 	public void setNuevaVenta(VentVenta nuevaVenta) {
 		this.nuevaVenta = nuevaVenta;
+	}
+
+	public VentVenta getEdicionVenta() {
+		return edicionVenta;
+	}
+
+	public void setEdicionVenta(VentVenta edicionVenta) {
+		this.edicionVenta = edicionVenta;
 	}
 	
 	

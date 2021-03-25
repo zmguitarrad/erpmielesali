@@ -14,6 +14,7 @@ import erpmielesali.model.core.entities.ProdStock;
 import erpmielesali.model.core.entities.ProdTipoProducto;
 import erpmielesali.model.core.entities.SegUsuario;
 import erpmielesali.model.core.entities.ThmEmpleado;
+import erpmielesali.model.core.entities.VentVentaDetalle;
 import erpmielesali.model.producto.managers.ManagerProdProducto;
 
 @Named
@@ -33,6 +34,7 @@ public class BeanProdProducto implements Serializable {
 	private int idProdTipoProducto;
 	private String codigoProducto;
 	private ProdProducto producto;
+	private int cant;
 	
 	
 
@@ -182,6 +184,7 @@ public class BeanProdProducto implements Serializable {
 			e.printStackTrace();
 		}
 	}
+
 	
 	
 	//METODOS ACCESORES
@@ -279,6 +282,14 @@ public class BeanProdProducto implements Serializable {
 
 	public void setProducto(ProdProducto producto) {
 		this.producto = producto;
+	}
+
+	public int getCant() {
+		return cant;
+	}
+
+	public void setCant(int cant) {
+		this.cant = cant;
 	}
 	
 	

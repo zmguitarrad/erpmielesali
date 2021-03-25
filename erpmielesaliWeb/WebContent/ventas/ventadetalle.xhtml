@@ -9,7 +9,7 @@
 		type="preRenderView"></f:event>
 </f:metadata>
 <h:head>
-	<title>Venta Consulta y agregacion</title>
+	<title>Venta-detalle Consulta y agregacion</title>
 </h:head>
 <body>
 	<p:growl>
@@ -18,10 +18,7 @@
 	<h:form>
 		<p:menubar>
 			<p:menuitem value="Regresar" icon="pi pi-home" action="menu" />
-			<p:menuitem value="Venta detalle" icon="pi pi-users"
-				action = "#{beanVentDetalle.actionCargarMenuVentaDetalle()}"/>
 			<f:facet name="options">
-			
 				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
 					icon="pi pi-user">
 					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
@@ -36,33 +33,33 @@
 		<p:overlayPanel for="cmdNuevo" showCloseIcon="true">
 				<h:form>
 				<p:panelGrid columns="2">
-				
-					<h:outputText value="Id venta" />
-					<p:inputText value="#{beanVenVentas.nuevaVenta.idVentVentas}"
-					required="true" requiredMessage="Ingrese id venta" />
+
 					
-					<h:outputText value="Seleccione Cliente:" />
-					<p:selectOneMenu value="#{beanVenVentas.cedulaVentCliente}">
+					<h:outputText value="Seleccione Factura:" />
+					<p:selectOneMenu value="#{beanVentDetalle.idVentVentas}">
 						<f:selectItem itemLabel="Seleccione..." noSelectionOption="true" />
-						<f:selectItems value="#{beanVenVentas.listaClientes}"
-							var="c" itemLabel="#{c.nombreCliente} #{c.apellidoCliente} "
-							itemValue="#{c.cedulaVentCliente}"></f:selectItems>
+						<f:selectItems value="#{beanVentDetalle.listaVentas}"
+							var="c" itemLabel="#{c.idVentVentas}"
+							itemValue="#{c.idVentVentas}"></f:selectItems>
+					</p:selectOneMenu>
+					
+					<h:outputText value="Seleccione Stock:" />
+					<p:selectOneMenu value="#{beanVentDetalle.idProdStock}">
+						<f:selectItem itemLabel="Seleccione..." noSelectionOption="true" />
+						<f:selectItems value="#{beanVentDetalle.listaStock}"
+							var="c" itemLabel="#{c.idProdStock}"
+							itemValue="#{c.idProdStock}"></f:selectItems>
 					</p:selectOneMenu>
 					
 					
-					<h:outputText value="Fecha" />
-					<p:calendar value="#{beanGasto.fecha}" showTime="true"></p:calendar> />
-					
-					<h:outputText value="Descuento" />
-					<p:inputText value="#{beanVenVentas.nuevaVenta.descuento}"
+					<h:outputText value="Unidades" />
+					<p:inputText value="#{beanVentDetalle.nuevoVentaDetalle.cantidadVendidas}"
 					required="true" requiredMessage="Ingrese el descuento" />
 					
-					<h:outputText value="Total" />
-					<p:inputText value="#{beanVenVentas.nuevaVenta.total}"
-					required="true" requiredMessage="Ingrese el total" />
+
 					
 					<p:commandButton value="Guardar" icon="pi pi-save"
-						actionListener="#{beanVenVentas.actionListenerNuevaVenta()}"
+						actionListener="#{beanVentDetalle.actionListenerNuevaVentaDetalle()}"
 						update="@form:,formDatos"></p:commandButton>
 				
 				</p:panelGrid>
@@ -71,25 +68,20 @@
 		</p:overlayPanel>
 		<h:form id="formDatos">
 				
-			<p:dataTable value="#{beanVenVentas.listaVentas}" var="v"
+			<p:dataTable value="#{beanVentDetalle.listaVentasDetalle}" var="v"
 				paginator="true" rows="5">
 				<p:column headerText="ID">
-					<h:outputText value="#{v.idVentVentas}" />
+					<h:outputText value="#{v.idVentVentaDetalle}" />
 				</p:column>
-				<p:column headerText="Tipo de Gasto" filterBy="#{v.ventCliente}"
+				<p:column headerText="Tipo Ventas" filterBy="#{v.ventVenta}"
 					filterMatchMode="contains">
-					<h:outputText value="#{v.ventCliente.nombreCliente} #{v.ventCliente.apellidoCliente}"  />
+					<h:outputText value="#{v.ventVenta.idVentVentas}" />
 				</p:column>
-
-				<p:column headerText="Fecha Gasto" filterBy="#{g.gastoFecha}"
-					filterMatchMode="contains">
-					<h:outputText value="#{v.fechaVentas}" />
+				<p:column headerText="Cantidad">
+					<h:outputText value="#{v.cantidadVendidas}" />
 				</p:column>
-				<p:column headerText="Descuento">
-					<h:outputText value="#{v.descuento}" />
-				</p:column>
-				<p:column headerText="Total">
-					<h:outputText value="#{v.total}" />
+				<p:column headerText="SubTotal">
+					<h:outputText value="#{v.subtotal}" />
 				</p:column>
 				<p:column headerText="OPCIONES">
 					<p:commandButton icon="pi pi-check-circle"

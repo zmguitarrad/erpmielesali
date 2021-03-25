@@ -107,6 +107,15 @@
 			</p:dataTable>
 		</h:form>
 	</p:panel>
+	<div class="ui-g-10">
+			<p:panel header="Reporte Clientes ">
+				<h:outputText value="Opciones para el reporte clientes" />
+				<h:form>
+				<p:commandButton value="Reporte" ajax="false"
+				action="#{beanVenCliente.actionReporte()}"></p:commandButton>
+				</h:form>
+			</p:panel>
+		</div>
 	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
 		responsive="true" width="350">
 		<p:commandButton value="No" type="button"

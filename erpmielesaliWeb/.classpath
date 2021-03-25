@@ -15,5 +15,12 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="src" path="/erpmielesaliEJB"/>
+	<classpathentry kind="lib" path="D:/Semestre Nuevo/mipymes/Proyecto/librerias/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/Semestre Nuevo/mipymes/Proyecto/librerias/commons-digester-2.1.jar"/>
+	<classpathentry kind="lib" path="D:/Semestre Nuevo/mipymes/Proyecto/librerias/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="D:/Semestre Nuevo/mipymes/Proyecto/librerias/groovy-2.4.5.jar"/>
+	<classpathentry kind="lib" path="D:/Semestre Nuevo/mipymes/Proyecto/librerias/itextpdf-5.5.4.jar"/>
+	<classpathentry kind="lib" path="D:/Semestre Nuevo/mipymes/Proyecto/librerias/itext-pdfa-5.5.4.jar"/>
+	<classpathentry kind="lib" path="D:/Semestre Nuevo/mipymes/Proyecto/librerias/jasperreports-6.0.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

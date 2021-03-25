@@ -140,7 +140,17 @@ public class ManagerProdProducto {
     public void eliminarStock(int idProdStock) throws Exception {
     	mDAO.eliminar(ProdStock.class, idProdStock);
     }
-
+    
+    public boolean actualizarStock(int idProdStock, int unidadesProducidas) throws Exception{
+    	
+    	
+    	ProdStock stock = (ProdStock) mDAO.findById(ProdStock.class, idProdStock);
+    	stock.setIdProdStock(idProdStock);
+    	stock.setUnidadesProducidas(unidadesProducidas);
+    	mDAO.actualizar(stock);
+    	
+    	return true;
+    }
     
 
 }
