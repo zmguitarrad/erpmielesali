@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:metadata>
+	<f:event listener="#{beanSegLogin.actionVerificarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata>
+<h:head>
+	<title>Venta Consulta y agregacion</title>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-home" action="menu" />
+			<f:facet name="options">
+				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
+					icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"
+						action="#{beanSegLogin.actionCerrarSesion()}"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+	<p:panel>
+		<p:commandButton value="Nuevo" icon="pi pi-plus" id="cmdNuevo"></p:commandButton>
+		<p:overlayPanel for="cmdNuevo" showCloseIcon="true">
+				<h:form>
+				<p:panelGrid columns="2">
+				
+					<h:outputText value="Id venta" />
+					<p:inputText value="#{beanVenVentas.nuevaVenta.idVentVentas}"
+					required="true" requiredMessage="Ingrese id venta" />
+					
+					<h:outputText value="Seleccione Cliente:" />
+					<p:selectOneMenu value="#{beanVenVentas.cedulaVentCliente}">
+						<f:selectItem itemLabel="Seleccione..." noSelectionOption="true" />
+						<f:selectItems value="#{beanVenVentas.listaClientes}"
+							var="c" itemLabel="#{c.nombreCliente} #{c.apellidoCliente} "
+							itemValue="#{c.cedulaVentCliente}"></f:selectItems>
+					</p:selectOneMenu>
+					
+					
+					<h:outputText value="Fecha" />
+					<p:calendar value="#{beanGasto.fecha}" showTime="true"></p:calendar> />
+					
+					<h:outputText value="Descuento" />
+					<p:inputText value="#{beanVenVentas.nuevaVenta.descuento}"
+					required="true" requiredMessage="Ingrese el descuento" />
+					
+					<h:outputText value="Total" />
+					<p:inputText value="#{beanVenVentas.nuevaVenta.total}"
+					required="true" requiredMessage="Ingrese el total" />
+					
+					<p:commandButton value="Guardar" icon="pi pi-save"
+						actionListener="#{beanVenVentas.actionListenerNuevaVenta()}"
+						update="@form:,formDatos"></p:commandButton>
+				
+				</p:panelGrid>
+				
+				</h:form>
+		</p:overlayPanel>
+		<h:form id="formDatos">
+				
+			<p:dataTable value="#{beanVenVentas.listaVentas}" var="v"
+				paginator="true" rows="5">
+				<p:column headerText="ID">
+					<h:outputText value="#{v.idVentVentas}" />
+				</p:column>
+				<p:column headerText="Tipo de Gasto" filterBy="#{v.ventCliente}"
+					filterMatchMode="contains">
+					<h:outputText value="#{v.ventCliente.nombreCliente} #{v.ventCliente.apellidoCliente}"  />
+				</p:column>
+
+				<p:column headerText="Fecha Gasto" filterBy="#{g.gastoFecha}"
+					filterMatchMode="contains">
+					<h:outputText value="#{v.fechaVentas}" />
+				</p:column>
+				<p:column headerText="Descuento">
+					<h:outputText value="#{v.descuento}" />
+				</p:column>
+				<p:column headerText="Total">
+					<h:outputText value="#{v.total}" />
+				</p:column>
+				<p:column headerText="OPCIONES">
+					<p:commandButton icon="pi pi-check-circle"
+						title="activar/desactivar" styleClass="ui-button-warning"
+						update="@form"
+						actionListener="#{beanGasto.actionLIstenerActivarDesactivarGasto(g.idGastGastos)}" />
+					<p:commandButton icon="pi pi-pencil" title="editar"
+						action= "#{beanGasto.actionListenerCargarGastos(g)}"/>
+					<p:commandButton icon="pi pi-times-circle" title="eliminar"
+						styleClass="ui-button-danger" update="@form"
+						actionListener = "#{beanGasto.actionListenerEliminarGasto(g.idGastGastos)}">
+						<p:confirm header="Confirmación"
+							message="Desea borrar cliente?" icon="pi pi-info-circle" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+		responsive="true" width="350">
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no ui-button-flat" />
+		<p:commandButton value="Sí" type="button"
+			styleClass="ui-confirmdialog-yes" />
+	</p:confirmDialog>
+	</p:panel>	
+</body>
+</html>

@@ -57,8 +57,9 @@
 				<p:column headerText="ID " style="width:40px">
 					<h:outputText value="#{stock.idProdStock}" />
 				</p:column>
-				<p:column headerText="Producto">
-					<h:outputText value="#{stock.prodProducto.nombreProducto}" />
+				<p:column headerText="Producto" filterBy="#{stock.prodProducto}"
+					filterMatchMode="contains">
+					<h:outputText value="#{stock.prodProducto.nombreProducto}"  />
 				</p:column>
 				<p:column headerText="Cantidad">
 					<h:outputText value="#{stock.unidadesProducidas}" />
