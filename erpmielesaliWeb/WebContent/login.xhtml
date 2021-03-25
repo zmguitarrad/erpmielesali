@@ -7,12 +7,18 @@
 
 <h:head>
 	<title>Login</title>
+	<style>
+    h1 { color: #FF0000; }
+    body
+   </style>
 </h:head>
-<body>
+<body style= "background-image=url(fondo.jpg);">
 	<div align="center">
+	<h1>Inicio Sesión</h1>
 	<p:messages>
 		<p:autoUpdate />
 	</p:messages>
+	<p><img src="fondo.jpg" alt="Logotipo de miel" width="59" height="35"/></p>
 		<h:form>
 			<p:panel>
 				<p:panelGrid columns="2">
@@ -25,16 +31,7 @@
 				</p:panelGrid>
 			</p:panel>
 		</h:form>
-		<h:form>
-			<p:panel>
-				<p:panelGrid columns="2">
-					<h:outputText value="Inicializar datos" />
-					<p:commandButton value="Inicializar"
-						actionListener="#{beanSegLogin.actionListenerInicialiarDemo()}"
-						icon="pi pi-close"></p:commandButton>
-				</p:panelGrid>
-			</p:panel>
-		</h:form>
+
 	</div>
 </body>
 </html>

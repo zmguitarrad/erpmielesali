@@ -18,10 +18,8 @@
 				action="/menu?faces-redirect=true" />
 			<p:menuitem value="Ver Cliente" icon="pi pi-users"
 				action = "#{beanVenCliente.actionDirecciones()}"/>
-			<p:menuitem value="Módulos" icon="pi pi-slack"
-				action="#{beanSegModulos.actionCargarMenuModulos()}" />
-			<p:menuitem value="Asignaciones" icon="pi pi-list"
-				action="#{beanSegAsignaciones.actionMenuAsignaciones()}" />
+				<p:menuitem value="Crear Venta" icon="pi pi-users"
+				action = "#{beanVenVentas.actionCargarMenuVentas()}"/>
 			<f:facet name="options">
 				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
 					icon="pi pi-user">
@@ -31,7 +29,7 @@
 				</p:menuButton>
 			</f:facet>
 		</p:menubar>
-		<p:staticMessage severity="info" summary="Módulo de seguridades"></p:staticMessage>
+		<p:staticMessage severity="info" summary="Módulo de Ventas"></p:staticMessage>
 	</h:form>
 	<div>
 	</div>
