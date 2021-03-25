@@ -14,6 +14,7 @@ import erpmielesali.model.core.entities.ProdStock;
 import erpmielesali.model.core.entities.ProdTipoProducto;
 import erpmielesali.model.core.entities.SegUsuario;
 import erpmielesali.model.core.entities.ThmEmpleado;
+import erpmielesali.model.core.entities.VentCliente;
 import erpmielesali.model.core.entities.VentDireccion;
 import erpmielesali.model.core.managers.ManagerDAO;
 
@@ -123,9 +124,11 @@ public class ManagerProdProducto {
     	
     }
     //crear 
-    public ProdStock insertarStock(ProdStock nuevoStock, ProdProducto producto) throws Exception {
+    public ProdStock insertarStock(ProdStock nuevoStock, String producto) throws Exception {
+    	
+    	ProdProducto producto1=(ProdProducto) mDAO.findById(ProdProducto.class, producto);
     	ProdStock stock=new ProdStock();
-    	stock.setProdProducto(producto);
+    	stock.setProdProducto(producto1);
     	stock.setUnidadesProducidas(nuevoStock.getUnidadesProducidas());
     	stock.setFechaActualizacion(nuevoStock.getFechaActualizacion());
     	mDAO.insertar(stock);

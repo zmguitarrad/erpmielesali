@@ -39,7 +39,7 @@
 						<f:selectItem itemLabel="Seleccione..." noSelectionOption="true" />
 						<f:selectItems value="#{beanProdProducto.listaProducto}"
 							var="s" itemLabel="#{s.nombreProducto}"
-							itemValue="#{s.nombreProducto}"></f:selectItems>
+							itemValue="#{s.codigoProdProduct}"></f:selectItems>
 					</p:selectOneMenu>	
 
 				<h:outputText value="Unidades" />
@@ -57,8 +57,9 @@
 				<p:column headerText="ID " style="width:40px">
 					<h:outputText value="#{stock.idProdStock}" />
 				</p:column>
-				<p:column headerText="Producto">
-					<h:outputText value="#{stock.prodProducto.nombreProducto}" />
+				<p:column headerText="Producto" filterBy="#{stock.prodProducto}"
+					filterMatchMode="contains">
+					<h:outputText value="#{stock.prodProducto.nombreProducto}"  />
 				</p:column>
 				<p:column headerText="Cantidad">
 					<h:outputText value="#{stock.unidadesProducidas}" />
