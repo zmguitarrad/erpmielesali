@@ -20,9 +20,7 @@ import erpmielesali.model.core.entities.VentCliente;
 import erpmielesali.model.core.entities.VentDireccion;
 import erpmielesali.model.ventas.managers.ManagerVentasCliente;
 import erpmielesali.model.ventas.managers.ManagerVentasDirecciones;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
+
 
 
 @Named
@@ -98,33 +96,7 @@ public class BeanVenCliente implements Serializable {
 		
 	}
 	
-	public String actionReporte(){
-		Map<String,Object> parametros=new HashMap<String,Object>();
-		/*parametros.put("p_titulo_principal",p_titulo_principal);
-		parametros.put("p_titulo",p_titulo);*/
-		FacesContext context=FacesContext.getCurrentInstance();
-		ServletContext servletContext=(ServletContext)context.getExternalContext().getContext();
-		String ruta=servletContext.getRealPath("ventas/cliente.jasper");
-		System.out.println(ruta);
-		HttpServletResponse response=(HttpServletResponse)context.getExternalContext().getResponse();
-		response.addHeader("Content-disposition", "attachment;filename=cliente.pdf");
-		response.setContentType("application/pdf");
-		try {
-		Class.forName("zmguitarradDS");
-		Connection connection = null;
-		connection = DriverManager.getConnection(
-		 "jdbc:postgresql://143.255.250.17:5432/zmguitarrad","zmguitarrad", "1003699566");
-		JasperPrint impresion=JasperFillManager.fillReport(ruta, parametros,connection);
-		JasperExportManager.exportReportToPdfStream(impresion, response.getOutputStream());
-		context.getApplication().getStateManager().saveView(context);
-		System.out.println("reporte generado.");
-		context.responseComplete();
-		} catch (Exception e) {
-		JSFUtil.crearMensajeERROR(e.getMessage());
-		e.printStackTrace();
-		}
-		return "";
-	}
+	
 	
 	
 	public List<VentCliente> getListaClientes() {
