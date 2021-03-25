@@ -9,7 +9,7 @@
 		type="preRenderView"></f:event>
 </f:metadata>
 <h:head>
-	<title>Producto</title>
+	<title>Stock</title>
 </h:head>
 <body>
 	<p:growl>
@@ -18,8 +18,6 @@
 	<h:form>
 		<p:menubar>
 			<p:menuitem value="Regresar" icon="pi pi-home" action="menu" />
-			<p:menuitem value="Nuevo producto" icon="pi pi-user-plus"
-				action="#{beanProdProducto.actionMenuNuevoProducto()}" />
 			<f:facet name="options">
 				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
 					icon="pi pi-user">
@@ -30,40 +28,53 @@
 			</f:facet>
 		</p:menubar>
 	</h:form>
-	<p:panel header="Lista de Producto">
-		<h:form>
-			<p:dataTable value="#{beanProdAlmacen.listaStock}" var="stock"
-				paginator="true" rows="5">
-				<p:column headerText="ID">
+	
+	<p:panel>
+		<p:commandButton value="Nuevo" icon="pi pi-plus" id="cmdNuevo"></p:commandButton>
+		<p:overlayPanel for="cmdNuevo" showCloseIcon="true">
+			<h:form>
+			<p:panelGrid columns="2">
+				<h:outputText value="Seleccione el producto:" />
+					<p:selectOneMenu value="#{beanProdProducto.codigoProducto}">
+						<f:selectItem itemLabel="Seleccione..." noSelectionOption="true" />
+						<f:selectItems value="#{beanProdProducto.listaProducto}"
+							var="s" itemLabel="#{s.nombreProducto}"
+							itemValue="#{s.nombreProducto}"></f:selectItems>
+					</p:selectOneMenu>	
+
+				<h:outputText value="Unidades" />
+				<p:inputText value="#{beanProdProducto.nuevoStock.unidadesProducidas}"></p:inputText>
+				<h:outputText value="Fecha" />
+				<p:calendar value="#{beanProdProducto.nuevoStock.fechaActualizacion}" showTime="true"></p:calendar> 
+					<p:commandButton value="Guardar" icon="pi pi-save"
+						actionListener="#{beanProdProducto.actionListenerINsertarStock()}"
+						update="@form:,formDatos"></p:commandButton>
+				</p:panelGrid>
+			</h:form>
+		</p:overlayPanel>
+		<h:form id="formDatos">
+			<p:dataTable emptyMessage="No hay registros aún." value="#{beanProdProducto.listaStock}" var="stock">
+				<p:column headerText="ID " style="width:40px">
 					<h:outputText value="#{stock.idProdStock}" />
 				</p:column>
-				<p:column headerText="Producto" filterBy="#{stock.prodProducto}"
-					filterMatchMode="contains">
+				<p:column headerText="Producto">
 					<h:outputText value="#{stock.prodProducto.nombreProducto}" />
 				</p:column>
-				<p:column headerText="Unidades Producidas" filterBy="#{stock.unidadesProducidas}"
-					filterMatchMode="contains">
+				<p:column headerText="Cantidad">
 					<h:outputText value="#{stock.unidadesProducidas}" />
 				</p:column>
-				
-				<p:column headerText="FECHA">
+				<p:column headerText="Fecha">
 					<h:outputText value="#{stock.fechaActualizacion}" />
 				</p:column>
-
-				<p:column headerText="OPCIONES">
-					<p:commandButton icon="pi pi-check-circle"
-						title="activar/desactivar" styleClass="ui-button-warning"
-						update="@form"
-						actionListener="#{beanProdProducto.actionListenerActivarDesactivarProducto(producto.codigoProdProduct)}" />
-					<p:commandButton icon="pi pi-pencil" title="editar"
-						action="#{beanProdProducto.actionSeleccionarEdicionProducto(producto)}" />	
+				<p:column headerText="OPCIONES">		
 					<p:commandButton icon="pi pi-times-circle" title="eliminar"
 						styleClass="ui-button-danger" update="@form"
-						actionListener="#{beanProdProducto.actionListenerEliminarProducto(producto.codigoProdProduct)}">
+						actionListener="#{beanProdProducto.actionListenerEliminarStock(stock.idProdStock)}">
 						<p:confirm header="Confirmación"
-							message="Desea borrar este producto?" icon="pi pi-info-circle" />
+							message="Desea borrar la categoria?" icon="pi pi-info-circle" />
 					</p:commandButton>
 				</p:column>
+				
 			</p:dataTable>
 		</h:form>
 	</p:panel>
@@ -76,4 +87,3 @@
 	</p:confirmDialog>
 </body>
 </html>
-

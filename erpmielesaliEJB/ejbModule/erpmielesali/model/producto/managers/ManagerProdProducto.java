@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 
 
 import erpmielesali.model.core.entities.ProdProducto;
+import erpmielesali.model.core.entities.ProdStock;
 import erpmielesali.model.core.entities.ProdTipoProducto;
 import erpmielesali.model.core.entities.SegUsuario;
 import erpmielesali.model.core.entities.ThmEmpleado;
@@ -72,6 +73,8 @@ public class ManagerProdProducto {
     	return(ProdProducto) mDAO.findById(ProdProducto.class, codigoProdProduct);
     	
     }
+ 
+    
     	//listar para stock
     public List<ProdProducto> findAllAllProductoStock(){
     	return mDAO.findAll(ProdProducto.class, "codigoProdProduct");
@@ -110,6 +113,29 @@ public class ManagerProdProducto {
     	producto.setActivo(!producto.getActivo());
     	System.out.println("activar/desactivar "+producto.getActivo());
     	mDAO.actualizar(producto);
+    }
+    
+    // TABLA STOCK
+    	//listar 
+	 //listar
+    public List<ProdStock>findAllProdStock(){
+    	return mDAO.findAll(ProdStock.class);
+    	
+    }
+    //crear 
+    public ProdStock insertarStock(ProdStock nuevoStock, ProdProducto producto) throws Exception {
+    	ProdStock stock=new ProdStock();
+    	stock.setProdProducto(producto);
+    	stock.setUnidadesProducidas(nuevoStock.getUnidadesProducidas());
+    	stock.setFechaActualizacion(nuevoStock.getFechaActualizacion());
+    	mDAO.insertar(stock);
+    	return stock;
+
+    	
+    }
+		//eliminar tipo
+    public void eliminarStock(int idProdStock) throws Exception {
+    	mDAO.eliminar(ProdStock.class, idProdStock);
     }
 
     

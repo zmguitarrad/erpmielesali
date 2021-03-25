@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import erpmielesali.controller.JSFUtil;
 import erpmielesali.model.core.entities.ProdProducto;
+import erpmielesali.model.core.entities.ProdStock;
 import erpmielesali.model.core.entities.ProdTipoProducto;
 import erpmielesali.model.core.entities.SegUsuario;
 import erpmielesali.model.core.entities.ThmEmpleado;
@@ -22,11 +23,16 @@ public class BeanProdProducto implements Serializable {
 	private ManagerProdProducto mProducto;
 	private List<ProdProducto>listaProducto;
 	private List<ProdTipoProducto>listaTipo;
+	private List<ProdStock>listaStock;
 	private ProdProducto nuevoProducto;
 	private ProdProducto edicionProducto;
 	private ProdTipoProducto nuevoTipo;
 	private ProdTipoProducto edicionTipo;
+	private ProdStock nuevoStock;
+	private ProdStock edicionStock;
 	private int idProdTipoProducto;
+	private String codigoProducto;
+	private ProdProducto producto;
 	
 	
 
@@ -38,8 +44,10 @@ public class BeanProdProducto implements Serializable {
 	public void inicializador() {
 		listaTipo =mProducto.findAllProdTipo();
 		listaProducto=mProducto.findAllProdProducto();
+		listaStock=mProducto.findAllProdStock();
 		nuevoTipo=new ProdTipoProducto();
 		nuevoProducto=new ProdProducto();
+		nuevoStock=new ProdStock();
 		
 
 	}
@@ -143,6 +151,40 @@ public class BeanProdProducto implements Serializable {
 		
 	}
 	
+	//STOCK
+		//listar stock
+	public String actionCargarMenuStock() {
+		listaTipo=mProducto.findAllProdTipo();
+		listaProducto=mProducto.findAllProdProducto();
+		listaStock=mProducto.findAllProdStock();
+		return "stock?faces-redirect=true";
+	}
+	
+	//insertar 
+	public void actionListenerINsertarStock() {
+		try {
+			mProducto.insertarStock(nuevoStock, producto);
+			listaStock=mProducto.findAllProdStock();
+			JSFUtil.crearMensajeINFO("Stock insertado.");
+		} catch (Exception e) {
+			JSFUtil.crearMensajeERROR(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+		//eliminar
+	public void actionListenerEliminarStock(int idProdStock) {
+		try {
+			mProducto.eliminarStock(idProdStock);;
+			listaStock=mProducto.findAllProdStock();
+			JSFUtil.crearMensajeINFO("eliminado");
+		} catch (Exception e) {
+			JSFUtil.crearMensajeERROR(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	
+	//METODOS ACCESORES
 	public List<ProdProducto> getListaProducto() {
 		return listaProducto;
 	}
@@ -198,6 +240,47 @@ public class BeanProdProducto implements Serializable {
 	public void setIdProdTipoProducto(int idProdTipoProducto) {
 		this.idProdTipoProducto = idProdTipoProducto;
 	}
+
+	public List<ProdStock> getListaStock() {
+		return listaStock;
+	}
+
+	public void setListaStock(List<ProdStock> listaStock) {
+		this.listaStock = listaStock;
+	}
+
+	public ProdStock getNuevoStock() {
+		return nuevoStock;
+	}
+
+	public void setNuevoStock(ProdStock nuevoStock) {
+		this.nuevoStock = nuevoStock;
+	}
+
+	public ProdStock getEdicionStock() {
+		return edicionStock;
+	}
+
+	public void setEdicionStock(ProdStock edicionStock) {
+		this.edicionStock = edicionStock;
+	}
+
+	public String getCodigoProducto() {
+		return codigoProducto;
+	}
+
+	public void setCodigoProducto(String codigoProducto) {
+		this.codigoProducto = codigoProducto;
+	}
+
+	public ProdProducto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(ProdProducto producto) {
+		this.producto = producto;
+	}
+	
 	
 	
 	
