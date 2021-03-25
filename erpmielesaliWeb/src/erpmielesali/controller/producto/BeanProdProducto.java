@@ -163,7 +163,7 @@ public class BeanProdProducto implements Serializable {
 	//insertar 
 	public void actionListenerINsertarStock() {
 		try {
-			mProducto.insertarStock(nuevoStock, producto);
+			mProducto.insertarStock(nuevoStock, codigoProducto);
 			listaStock=mProducto.findAllProdStock();
 			JSFUtil.crearMensajeINFO("Stock insertado.");
 		} catch (Exception e) {

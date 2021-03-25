@@ -123,9 +123,10 @@ public class ManagerProdProducto {
     	
     }
     //crear 
-    public ProdStock insertarStock(ProdStock nuevoStock, ProdProducto producto) throws Exception {
+    public ProdStock insertarStock(ProdStock nuevoStock, String producto) throws Exception {
+    	ProdProducto p=(ProdProducto)mDAO.findById(ProdProducto.class, producto);
     	ProdStock stock=new ProdStock();
-    	stock.setProdProducto(producto);
+    	stock.setProdProducto(p);
     	stock.setUnidadesProducidas(nuevoStock.getUnidadesProducidas());
     	stock.setFechaActualizacion(nuevoStock.getFechaActualizacion());
     	mDAO.insertar(stock);
