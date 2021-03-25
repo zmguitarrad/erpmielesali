@@ -3,3 +3,10 @@
 .top-aligned-columns td{
 	vertical-align: top;
 }
+h1{
+	color: red;
+}
+.produccion{
+	color: red;
+	text-align: center;
+}

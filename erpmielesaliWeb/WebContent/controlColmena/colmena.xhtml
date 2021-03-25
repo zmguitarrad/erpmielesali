@@ -35,16 +35,13 @@
 			<p:dataTable value="#{beanControlColmena.listaColmena}" var="colmena"
 				paginator="true" rows="5">
 				
-				<p:column headerText="Nombre" filterBy="#{colmena.nombreColmena}"
-					filterMatchMode="contains">
+				<p:column headerText="Nombre" >
 					<h:outputText value="#{colmena.nombreColmena}" />
 				</p:column>
-				<p:column headerText="Productora" filterBy="#{colmena.productora}"
-					filterMatchMode="contains">
+				<p:column headerText="Productora" >
 					<h:outputText value="#{colmena.productora}" />
 				</p:column>
-				<p:column headerText="Fecha" filterBy="#{colmena.fechaCreacion}"
-					filterMatchMode="contains">
+				<p:column headerText="Fecha" >
 					<h:outputText value="#{colmena.fechaCreacion}" />
 				</p:column>
 

@@ -124,19 +124,10 @@ public class ManagerProdProducto {
     	
     }
     //crear 
-    public ProdStock insertarStock(ProdStock nuevoStock, String producto) throws Exception {
-
-    	ProdProducto p=(ProdProducto)mDAO.findById(ProdProducto.class, producto);
-
-    	
+    public ProdStock insertarStock(ProdStock nuevoStock, String producto) throws Exception {	
     	ProdProducto producto1=(ProdProducto) mDAO.findById(ProdProducto.class, producto);
-
     	ProdStock stock=new ProdStock();
-
-    	stock.setProdProducto(p);
-
     	stock.setProdProducto(producto1);
-
     	stock.setUnidadesProducidas(nuevoStock.getUnidadesProducidas());
     	stock.setFechaActualizacion(nuevoStock.getFechaActualizacion());
     	mDAO.insertar(stock);
@@ -144,12 +135,12 @@ public class ManagerProdProducto {
 
     	
     }
-		//eliminar tipo
+		//eliminar stock
     public void eliminarStock(int idProdStock) throws Exception {
     	mDAO.eliminar(ProdStock.class, idProdStock);
     }
     
-    public boolean actualizarStock(int idProdStock, int unidadesProducidas) throws Exception{
+    /*public boolean actualizarStock(int idProdStock, int unidadesProducidas) throws Exception{
     	
     	
     	ProdStock stock = (ProdStock) mDAO.findById(ProdStock.class, idProdStock);
@@ -158,6 +149,17 @@ public class ManagerProdProducto {
     	mDAO.actualizar(stock);
     	
     	return true;
+    }*/
+    //actualzar stock
+		//editar
+    public void actualizarStock(ProdStock edicionStock) throws Exception {
+    	ProdStock stock =(ProdStock) mDAO.findById(ProdStock.class, edicionStock.getIdProdStock());
+    	
+    	stock.setProdProducto(edicionStock.getProdProducto());
+    	stock.setUnidadesProducidas(edicionStock.getUnidadesProducidas());
+    	stock.setFechaActualizacion(edicionStock.getFechaActualizacion());
+    	mDAO.actualizar(stock);
+
     }
 
 }

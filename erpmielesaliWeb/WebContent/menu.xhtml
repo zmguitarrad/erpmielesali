@@ -7,6 +7,7 @@
 
 <h:head>
 	<title>Menu principal</title>
+	<h:outputStylesheet library="css" name="minimarketdemo.css"></h:outputStylesheet>
 </h:head>
 <body >
 	<h:form>
@@ -25,18 +26,17 @@
 	<div align="center">
 		<h:form>
 			<p:panel style="width:50%">
-				<p:staticMessage severity="info" summary="SISTEMA MIELESALI"
-					style="width: 100%" />
+				<h1>MIELES ALI  </h1>	
 				<p:dataView value="#{beanSegLogin.loginDTO.listaModulos}"
 					var="modulo" layout="grid" gridIcon="pi pi-th-large"
 					emptyMessage="No tiene módulos asignados. Consulte al administrador.">
 					<p:dataViewGridItem>
-						<p:commandLink
+						<p:commandLink 
 							action="#{beanSegLogin.actionMenu(modulo.rutaAcceso)}">
-							<p:panelGrid columns="1">
+							<p:panelGrid columns="2">
 								<h:outputText value="#{modulo.nombreModulo}" />
-								<h:outputText value="#{modulo.rutaAcceso}" />
-								<i class="pi pi-slack" style="font-size: 2rem"></i>
+								<i class="pi pi-briefcase"></i>
+
 							</p:panelGrid>
 						</p:commandLink>
 					</p:dataViewGridItem>
@@ -46,3 +46,5 @@
 	</div>
 </body>
 </html>
+
+

@@ -184,6 +184,23 @@ public class BeanProdProducto implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	//editar
+	public String actionSeleccionarEdicionStock(ProdStock producto) {
+		edicionStock=producto;
+		return "stock_edicion";
+	}
+	public void actionListenerEdicionStock() {
+		try {
+			mProducto.actualizarStock(edicionStock);
+			listaStock=mProducto.findAllProdStock();
+			
+			JSFUtil.crearMensajeINFO(" actualizado.");
+		} catch (Exception e) {
+			JSFUtil.crearMensajeERROR(e.getMessage());
+			e.printStackTrace();
+		}
+		
+	}
 
 	
 	

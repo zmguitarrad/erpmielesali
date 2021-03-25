@@ -9,21 +9,15 @@
 		type="preRenderView"></f:event>
 </f:metadata>
 <h:head>
-	<title>Producto</title>
-	<h:outputStylesheet library="css" name="minimarketdemo.css"></h:outputStylesheet>
+	<title>Stock</title>
 </h:head>
 <body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
 	<h:form>
 		<p:menubar>
-			<p:menuitem value="Regresar" icon="pi pi-home"
-				action="/menu?faces-redirect=true" />
-			<p:menuitem value="Producto" icon="pi pi-briefcase"
-				action="#{beanProdProducto.actionCargarMenuProductos()}"/>
-			<p:menuitem value="Tipos de Producto" icon="pi pi-briefcase"
-				action="#{beanProdProducto.actionCargarMenuTipo()}"/>
-			<p:menuitem value="Stock" icon="pi pi-briefcase"
-				action="#{beanProdProducto.actionCargarMenuStock()}"/>	
-			
+			<p:menuitem value="Regresar" icon="pi pi-home" action="stock" />
 			<f:facet name="options">
 				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
 					icon="pi pi-user">
@@ -33,12 +27,23 @@
 				</p:menuButton>
 			</f:facet>
 		</p:menubar>
-		<br></br>
-		<h1 class="produccion">MÓDULO PRODUCCIÓN</h1>
-		<img src="https://ichef.bbci.co.uk/news/640/cpsprodpb/1512E/production/_99481368_50bd90e5-ceff-4107-99c5-a24ed20f5ce9.jpg"/>
-		
 	</h:form>
-	<div>
-	</div>
+	<p:panel>
+		<h:form>
+			<p:panelGrid columns="2">
+		
+					
+				<h:outputText value="Unidades:" />
+				<p:inputNumber value="#{beanProdProducto.edicionStock.unidadesProducidas}"
+					required="true"  />
+					
+				<h:outputText value="Fecha" />
+				<p:calendar value="#{beanProdProducto.edicionStock.fechaActualizacion}" showTime="true"></p:calendar> 
+				
+				<p:commandButton value="Actualizar" icon="pi pi-save" update="@form"
+					actionListener="#{beanProdProducto.actionListenerEdicionStock()}"></p:commandButton>
+			</p:panelGrid>
+		</h:form>
+	</p:panel>
 </body>
 </html>

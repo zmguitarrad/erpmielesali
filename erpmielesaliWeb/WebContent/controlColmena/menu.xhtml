@@ -10,17 +10,18 @@
 </f:metadata>
 <h:head>
 	<title>Colmena</title>
+		<h:outputStylesheet library="css" name="minimarketdemo.css"></h:outputStylesheet>
 </h:head>
 <body>
 	<h:form>
 		<p:menubar>
 			<p:menuitem value="Regresar" icon="pi pi-home"
 				action="/menu?faces-redirect=true" />
-			<p:menuitem value="Colmena" icon="pi pi-users"
+			<p:menuitem value="Colmena" icon="pi pi-briefcase"
 				action="#{beanControlColmena.actionCargarMenuColmena()}"/>
-			<p:menuitem value="Tareas" icon="pi pi-slack"
+			<p:menuitem value="Tareas" icon="pi pi-book"
 				action="#{beanControlColmena.actionCargarMenuTarea()}" />
-			<p:menuitem value="Apiario" icon="pi pi-list"
+			<p:menuitem value="Apiario" icon="pi pi-star"
 				action="#{beanControlColmena.actionCargarMenuPlaga()}" />
 			<f:facet name="options">
 				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
@@ -31,7 +32,8 @@
 				</p:menuButton>
 			</f:facet>
 		</p:menubar>
-		<p:staticMessage severity="info" summary="Módulo Producto"></p:staticMessage>
+		<h1 class="produccion">MÓDULO CONTROL APIARIO</h1>
+		
 	</h:form>
 	<div>
 	</div>

@@ -44,7 +44,7 @@ public class BeanSegLogin implements Serializable {
 	public String actionLogin() {
 		try {
 			loginDTO=mSeguridades.login(idSegUsuario, clave,direccionIP);
-			loginDTO.setDireccionIP(direccionIP);
+			//loginDTO.setDireccionIP(direccionIP);
 			return "menu?faces-redirect=true";
 		} catch (Exception e) {
 			JSFUtil.crearMensajeERROR(e.getMessage());
@@ -56,6 +56,10 @@ public class BeanSegLogin implements Serializable {
 	public String actionMenu(String ruta) {
 		return ruta+"?faces-redirect=true";
 	}
+	public String actionPrincipal() {
+		return "?faces-redirect=tru";
+	}
+	
 	
 	public String actionCerrarSesion(){
 		mSeguridades.cerrarSesion(loginDTO.getIdSegUsuario());
